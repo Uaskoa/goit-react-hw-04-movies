@@ -25,8 +25,7 @@ async componentDidMount() {
 
 
     render () { 
-        console.log(this.props.match.url);
-         return (
+                 return (
            <div>
              <h1>Home page</h1>
              <ul>

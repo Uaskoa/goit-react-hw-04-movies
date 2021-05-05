@@ -1,6 +1,9 @@
 import { Component } from "react";
 import { NavLink, Route } from "react-router-dom";
+import MovieCast from './components/MovieCast'
+import MovieReviews from "./components/MovieReviews";
 import axios from 'axios'
+
 
 
 const BASE_URL = "https://api.themoviedb.org/3";
@@ -13,7 +16,7 @@ class MovieDetailsView extends Component {
     // vote_average: null,
     // overview: null,
     // genres: null,
-    book: {},
+    movie: {},
   };
 
   async componentDidMount() {
@@ -22,41 +25,65 @@ class MovieDetailsView extends Component {
       `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}`
     );
     console.log(response.data);
-    this.setState({ book: response.data });
+    this.setState({ movie: response.data });
   }
 
   render() {
-    console.log(this.props.match.params.movieId);
-    // console.log(`${IMG_URL}${this.state.book.poster_path}`);
+    // console.log(this.props.match.params.movieId);
+    // console.log(`${IMG_URL}${this.state.movie.poster_path}`);
 
-    // const date = this.state.book.release_date;
+    // const date = this.state.movie.release_date;
     // console.log(date);
     // console.log(date.split('-')[0]);
-    // const genres = this.state.book.genres.map(genre=>genre.name);
- console.log(this.props.match.url);
+    // const genres = this.state.movie.genres.map(genre=>genre.name);
+//  console.log(this.props.match.url);
+const {
+  poster_path,
+  title,
+  release_date,
+  vote_average,
+  overview,
+} = this.state.movie;
     return (
+     
       <div>
         <h1>Movie details</h1>
-        <img
-          src={`${IMG_URL}${this.state.book.poster_path}`}
+                <img
+          src={`${IMG_URL}${poster_path}`}
           alt=""
           width="200px"
         />
         <h2>
-          {this.state.book.title}( {this.state.book.release_date})
+          {title}( {release_date})
         </h2>
-        <p>User Score: {this.state.book.vote_average}</p>
-        <p>{this.state.book.overview}</p>
-        {/* <p>{this.state.book.genres}</p> */}
+        <p>User Score: {vote_average}</p>
+        <p>{overview}</p>
+        {/* <p>{genres}</p> */}
 
         <h2>Additional information</h2>
         <ul>
           <li>
             <NavLink to={`${this.props.match.url}/cast`}>Cast</NavLink>
           </li>
-          <li>Reviews</li>
+          <li>
+            <NavLink to={`${this.props.match.url}/reviews`}>Reviews</NavLink>
+          </li>
         </ul>
-        <Route exact  path="/movies/:movieId/cast" render={() => <h2>Cast</h2>}/>
+        <Route
+          exact
+          path={`${this.props.match.path}/cast`}
+        //   render={(props) => {
+        //     console.log(props);
+        //     const movieId = props.match.params.movieId;  
+        //     console.log(movieId);
+        //     return <MovieCast {...props} />;}}
+            render={props => <MovieCast {...props} />}
+        />
+        <Route
+          exact
+          path={`${this.props.match.path}/reviews`}
+          render={(props) => <MovieReviews {...props} />}
+        />
       </div>
     );
   }
