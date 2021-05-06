@@ -58,7 +58,7 @@ class MoviesView extends Component {
             </li>
           ))}
         </ul>
-        ;
+        
       </div>
     );
   }
@@ -67,13 +67,3 @@ class MoviesView extends Component {
 export default MoviesView;
 
 
-{/* <ul>
-  {this.state.movies.map((movie) => (
-    <li key={movie.id}>
-      <Link to={`/movies/${movie.id}`}>
-        {movie.name}
-        {movie.title}
-      </Link>
-    </li>
-  ))}
-</ul>; */}

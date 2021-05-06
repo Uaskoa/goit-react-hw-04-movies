@@ -1,25 +1,26 @@
 import { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 
 import axios from "axios";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = "be2bb7fd29eddf6e05cfa10ca2e7b19c";
-const IMG_URL = "https://image.tmdb.org/t/p/w500";
+// const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
-class MovieCast extends Component {
+class MovieReviews extends Component {
   state = {
-    casts: [],
+    reviews: [],
   };
 
   async componentDidMount() {
-
     const movieId = this.props.match.params.movieId;
-       const response = await axios.get(
-      `${BASE_URL}/movie/${movieId}/credits?api_key=${API_KEY}`
+
+    const response = await axios.get(
+      `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}`
     );
 
-         this.setState({ casts: response.data.cast });
+    
+    this.setState({ reviews: response.data.results });
   }
 
   componentDidUpdatet() {
@@ -27,27 +28,20 @@ class MovieCast extends Component {
     // const response = await axios.get(
     //   `${BASE_URL}/trending/all/day?api_key=${API_KEY}`
     // );
-
     // //   console.log(response.data.results)
     // this.setState({ movies: response.data.results });
   }
 
   render() {
-
-   
+    // console.log(this.state.casts);
     return (
       <div>
-        <h2>Cast</h2>
+        <h2>Reviews</h2>
         <ul>
-          {this.state.casts.map((cast) => (
-            <li key ={cast.id}>
-              <img
-                src={`${IMG_URL}${cast.profile_path}`}
-                alt=""
-                width="200px"
-              />
-              <p>{cast.name}</p>
-              <p> Character: {cast.character}</p>
+          {this.state.reviews.map((review) => (
+            <li key={review.author}>
+              <p>Author: {review.author}</p>
+              <p> Character: {review.content}</p>
             </li>
           ))}
         </ul>
@@ -55,4 +49,4 @@ class MovieCast extends Component {
     );
   }
 }
-export default MovieCast;
+export default MovieReviews;
