@@ -54,15 +54,7 @@ class MoviesPage extends Component {
   render() {
     return (
       <div>
-        <h1>Movies</h1>
-        {/* <input
-          type="text"
-          placeholder="Search movie"
-          onChange={this.handleChange}
-        ></input>
-        <button type="submit" onClick={this.handleSubmit}>
-          search
-        </button> */}
+       
         <Searchbar onSubmit={this.onChangeQuery} />
         <MovieList movies={this.state.movies} />
         {/* <ul>

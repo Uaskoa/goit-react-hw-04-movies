@@ -1,5 +1,5 @@
 import { Component } from "react";
-// import "./Searchbar.scss";
+import "./Searchbar.scss";
 // import PropTypes from "prop-types";
 
 class Searchbar extends Component {
