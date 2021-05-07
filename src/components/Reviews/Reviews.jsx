@@ -7,7 +7,7 @@ const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = "be2bb7fd29eddf6e05cfa10ca2e7b19c";
 // const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
-class MovieReviews extends Component {
+class Reviews extends Component {
   state = {
     reviews: [],
   };
@@ -19,7 +19,6 @@ class MovieReviews extends Component {
       `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}`
     );
 
-    
     this.setState({ reviews: response.data.results });
   }
 
@@ -49,4 +48,4 @@ class MovieReviews extends Component {
     );
   }
 }
-export default MovieReviews;
+export default Reviews;

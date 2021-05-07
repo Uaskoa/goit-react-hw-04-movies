@@ -1,18 +1,17 @@
 import { Component } from "react";
 import { NavLink, Route } from "react-router-dom";
-import MovieCast from '../components/MovieCast';
-import MovieReviews from "../components/MovieReviews";
+import Cast from "../components/Cast/Cast";
+import Reviews from "../components/Reviews/Reviews";
 // import PropTypes from 'prop-types'
-import defaultPoster from '../defaultPoster.jpg';
-import axios from 'axios'
-
-
+import defaultPoster from "../defaultPoster.jpg";
+import axios from "axios";
+import routes from "../routes";
 
 const BASE_URL = "https://api.themoviedb.org/3";
 const API_KEY = "be2bb7fd29eddf6e05cfa10ca2e7b19c";
 const IMG_URL = "https://image.tmdb.org/t/p/w500";
 
-class MovieDetailsView extends Component {
+class MovieDetailsPage extends Component {
   state = {
     // original_title: null,
     // vote_average: null,
@@ -23,46 +22,46 @@ class MovieDetailsView extends Component {
 
   async componentDidMount() {
     const { movieId } = this.props.match.params;
-    try {const response = await axios.get(
-      `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`
-    );
-    // console.log(response.data);
-    this.setState({ movie: response.data })} catch(err) {
-      throw err
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`
+      );
+      // console.log(response.data);
+      this.setState({ movie: response.data });
+    } catch (err) {
+      throw err;
     }
-
-
-
-    // const response = await axios.get(
-    //   `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`
-    // );
-    // // console.log(response.data);
-    // this.setState({ movie: response.data });
   }
 
+  handleGoBack = () => {
+    const { location, history } = this.props;
+
+    if (location.state && location.state.from) {
+      return history.push(location.state.from);
+    }
+    history.push(routes.home);
+
+    // history.push(location?.state?.from || routes.home);
+  };
+
   render() {
-    // console.log(this.props.match.params.movieId);
-    // console.log(`${IMG_URL}${this.state.movie.poster_path}`);
+    const {
+      poster_path,
+      title,
+      release_date,
+      vote_average,
+      overview,
+      genres,
+    } = this.state.movie;
 
-    // const date = this.state.movie.release_date;
-    // console.log(date);
-    // console.log(date.split('-')[0]);
-    // const genres = this.state.movie.genres.map(genre=>genre.name);
-//  console.log(this.props.match.url);
-const {
-  poster_path,
-  title,
-  release_date,
-  vote_average,
-  overview, genres,
-} = this.state.movie;
-
-const year = new Date(release_date).getFullYear();
+    const year = new Date(release_date).getFullYear();
 
     return (
       <div>
         <h1>Movie details</h1>
-
+        <button type="button" onClick={this.handleGoBack}>
+          Go back
+        </button>
         {title && (
           <>
             {poster_path ? (
@@ -100,26 +99,20 @@ const year = new Date(release_date).getFullYear();
         <Route
           exact
           path={`${this.props.match.path}/cast`}
-          //   render={(props) => {
-          //     console.log(props);
-          //     const movieId = props.match.params.movieId;
-          //     console.log(movieId);
-          //     return <MovieCast {...props} />;}}
-          render={(props) => <MovieCast {...props} />}
+          render={(props) => <Cast {...props} />}
         />
         <Route
           exact
           path={`${this.props.match.path}/reviews`}
-          render={(props) => <MovieReviews {...props} />}
+          render={(props) => <Reviews {...props} />}
         />
       </div>
     );
   }
 }
 
-
-// MovieDetailsView.defaultProps = {
+// MovieDetailsPage.defaultProps = {
 //   poster_path: defaultPoster,
 // };
 
-export default MovieDetailsView;  
+export default MovieDetailsPage;

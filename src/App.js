@@ -1,27 +1,39 @@
+import { Suspense, lazy } from "react";
 import { Route, Switch } from "react-router-dom";
-import HomeView from "../src/views/HomeView";
-import MoviesView from "../src/views/MoviesView";
-import MovieDetailsView from "../src/views/MovieDetailsView";
-import NotFoundView from "../src/views/NotFoundView";
-import AppBar from './components/AppBar/AppBar'
-import routes from './routes'
-import './App.css'
+// import HomePage from "../src/views/HomePage";
+// import MoviesPage from "../src/views/MoviesPage";
+// import MovieDetailsPage from "../src/views/MovieDetailsPage";
+import NotFoundPage from "../src/views/NotFoundPage";
+import AppBar from "./components/AppBar/AppBar";
+import routes from "./routes";
+import "./App.css";
 
+const HomePage = lazy(() =>
+  import("./views/HomePage.jsx" /* webpackChunkName: "home-page" */)
+);
 
+const MovieDetailsPage = lazy(() =>
+  import(
+    "./views/MovieDetailsPage.jsx" /* webpackChunkName: "movie-details-page" */
+  )
+);
 
+const MoviesPage = lazy(() =>
+  import("./views/MoviesPage.jsx" /* webpackChunkName: "movies-page" */)
+);
 
 function App() {
   return (
     <div className="container">
       <AppBar />
-
-      
-      <Switch>
-        <Route exact path={routes.home} component={HomeView} />
-        <Route path={routes.movieDetails} component={MovieDetailsView} />
-        <Route exact path={routes.movies} component={MoviesView} />
-        <Route path="" component={NotFoundView} />
-      </Switch>
+      <Suspense fallback={<h1>Loading</h1>}>
+        <Switch>
+          <Route exact path={routes.home} component={HomePage} />
+          <Route path={routes.movieDetails} component={MovieDetailsPage} />
+          <Route exact path={routes.movies} component={MoviesPage} />
+          <Route component={NotFoundPage} />
+        </Switch>
+      </Suspense>
     </div>
   );
 }
