@@ -1,11 +1,9 @@
-
 .NavLink {
-    font-size: 20px;
-color: black
+  font-size: 20px;
+  color: black;
 }
 
 .NavLink--active {
-    font-size: 20px;
-        color: red
-  
+  font-size: 20px;
+  color: red;
 }

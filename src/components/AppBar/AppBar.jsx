@@ -1,11 +1,10 @@
+import Navigation from "../Navigation/Navigation";
 
-import Navigation from '../Navigation/Navigation'
-
-import './AppBar.scss'
+import "./AppBar.scss";
 
 const AppBar = () => {
   return (
-    <header className='header'> 
+    <header className="header">
       <Navigation />
     </header>
   );

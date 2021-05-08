@@ -1,6 +1,6 @@
 .Searchbar {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   align-items: center;
   min-height: 64px;
   padding-right: 24px;
@@ -9,8 +9,8 @@
   padding-bottom: 12px;
   color: #fff;
   background-color: #cfd6e3;
-//   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
-//     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
+  //   box-shadow: 0px 2px 4px -1px rgba(0, 0, 0, 0.2),
+  //     0px 4px 5px 0px rgba(0, 0, 0, 0.14), 0px 1px 10px 0px rgba(0, 0, 0, 0.12);
 }
 
 .SearchForm {
@@ -22,12 +22,12 @@
   border-radius: 3px;
   overflow: hidden;
 
-    &-button {
+  &-button {
     display: inline-block;
     width: 48px;
     height: 48px;
     border: 0;
-    background-image: url('https://image.flaticon.com/icons/svg/149/149852.svg');
+    background-image: url("https://image.flaticon.com/icons/svg/149/149852.svg");
     background-size: 40%;
     background-repeat: no-repeat;
     background-position: center;
@@ -40,7 +40,7 @@
       opacity: 1;
     }
 
-        &-label {
+    &-label {
       position: absolute;
       width: 1px;
       height: 1px;
@@ -51,8 +51,8 @@
       clip-path: inset(50%);
       border: 0;
     }
-    }
-   &-input {
+  }
+  &-input {
     display: inline-block;
     width: 100%;
     font: inherit;
@@ -60,12 +60,10 @@
     border: none;
     outline: none;
     padding: 10px;
-   
 
     &::placeholder {
       font: inherit;
       font-size: 18px;
-   
     }
-}
+  }
 }

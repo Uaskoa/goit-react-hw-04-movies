@@ -1,11 +1,8 @@
 import { Component } from "react";
-// import { Link } from "react-router-dom";
-
 import axios from "axios";
-
-const BASE_URL = "https://api.themoviedb.org/3";
-const API_KEY = "be2bb7fd29eddf6e05cfa10ca2e7b19c";
-// const IMG_URL = "https://image.tmdb.org/t/p/w500";
+import PropTypes from "prop-types";
+import { BASE_URL, API_KEY } from "../../settings";
+import "./Reviews.scss";
 
 class Reviews extends Component {
   state = {
@@ -14,38 +11,37 @@ class Reviews extends Component {
 
   async componentDidMount() {
     const movieId = this.props.match.params.movieId;
-
     const response = await axios.get(
       `${BASE_URL}/movie/${movieId}/reviews?api_key=${API_KEY}`
     );
-
     this.setState({ reviews: response.data.results });
   }
 
-  componentDidUpdatet() {
-    // console.log(this.props.match.params.movieId);
-    // const response = await axios.get(
-    //   `${BASE_URL}/trending/all/day?api_key=${API_KEY}`
-    // );
-    // //   console.log(response.data.results)
-    // this.setState({ movies: response.data.results });
-  }
-
   render() {
-    // console.log(this.state.casts);
+    const { reviews } = this.state;
     return (
       <div>
-        <h2>Reviews</h2>
-        <ul>
-          {this.state.reviews.map((review) => (
-            <li key={review.author}>
-              <p>Author: {review.author}</p>
-              <p> Character: {review.content}</p>
-            </li>
-          ))}
-        </ul>
+        {reviews.length > 0 ? (
+          <ul className="review__list">
+            {reviews.map((review) => (
+              <li key={review.author} className="review__item">
+                <p className="review__text">
+                  <span className="review__author">Author: </span>
+                  {review.author}
+                </p>
+                <p className="review__text">{review.content}</p>
+              </li>
+            ))}
+          </ul>
+        ) : (
+          <p>No reviews yet</p>
+        )}
       </div>
     );
   }
 }
 export default Reviews;
+
+Reviews.propTypes = {
+  movieId: PropTypes.string,
+};

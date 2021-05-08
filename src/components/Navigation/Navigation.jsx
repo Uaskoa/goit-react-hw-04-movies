@@ -9,16 +9,14 @@ const Navigation = () => {
         className="nav__link"
         exact
         to={routes.home}
-        // className="NavLink"
         activeClassName="nav__link--active"
       >
         Home
       </NavLink>
 
-      <NavLink
+                                                    <NavLink
         className="nav__link"
         to={routes.movies}
-        // className="NavLink"
         activeClassName="nav__link--active"
       >
         Movies
