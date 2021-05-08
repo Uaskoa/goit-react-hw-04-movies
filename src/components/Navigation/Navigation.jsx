@@ -14,7 +14,7 @@ const Navigation = () => {
         Home
       </NavLink>
 
-                                                    <NavLink
+                                  <NavLink
         className="nav__link"
         to={routes.movies}
         activeClassName="nav__link--active"
