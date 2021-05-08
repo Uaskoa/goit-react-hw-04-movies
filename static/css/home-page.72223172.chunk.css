@@ -1,0 +1,2 @@
+.movies{display:-webkit-flex;display:flex;-webkit-flex-wrap:wrap;flex-wrap:wrap;-webkit-justify-content:space-evenly;justify-content:space-evenly;padding-left:0}.movies__item{width:250px;margin:5px;box-shadow:0 4px 8px 0 rgba(0,0,0,.2),0 6px 20px 0 rgba(0,0,0,.19)}.movies__link{text-decoration:none;color:#022147;font-weight:400px}.movies__title{display:block;text-align:center;padding:20px}
+/*# sourceMappingURL=home-page.72223172.chunk.css.map */
