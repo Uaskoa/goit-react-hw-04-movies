@@ -1,6 +1,6 @@
-import { NavLink } from "react-router-dom";
-import routes from "../../routes";
-import "./Navigation.scss";
+import { NavLink } from 'react-router-dom';
+import routes from '../../routes';
+import './Navigation.scss';
 
 const Navigation = () => {
   return (
@@ -14,7 +14,7 @@ const Navigation = () => {
         Home
       </NavLink>
 
-                                  <NavLink
+      <NavLink
         className="nav__link"
         to={routes.movies}
         activeClassName="nav__link--active"
