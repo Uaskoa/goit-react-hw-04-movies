@@ -19,7 +19,6 @@ const Navigation = () => {
         to={routes.movies}
         activeClassName="nav__link--active"
       >
-        {' '}
         Movies
       </NavLink>
     </nav>

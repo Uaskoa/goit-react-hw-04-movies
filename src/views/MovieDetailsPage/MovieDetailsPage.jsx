@@ -1,13 +1,13 @@
-import { Component } from "react";
-import axios from "axios";
-import { BASE_URL, API_KEY, IMG_URL } from "../../settings";
-import { NavLink, Route } from "react-router-dom";
-import Cast from "../../components/Cast/Cast";
-import Reviews from "../../components/Reviews/Reviews";
+import { Component } from 'react';
+import axios from 'axios';
+import { BASE_URL, API_KEY, IMG_URL } from '../../settings';
+import { NavLink, Route } from 'react-router-dom';
+import Cast from '../../components/Cast/Cast';
+import Reviews from '../../components/Reviews/Reviews';
 // import PropTypes from 'prop-types'
-import defaultPoster from "../../defaultPoster.jpg";
-import routes from "../../routes";
-import "./MovieDetailsPage.scss";
+import defaultPoster from '../../defaultPoster.jpg';
+import routes from '../../routes';
+import './MovieDetailsPage.scss';
 
 class MovieDetailsPage extends Component {
   state = {
@@ -18,7 +18,7 @@ class MovieDetailsPage extends Component {
     const { movieId } = this.props.match.params;
     try {
       const response = await axios.get(
-        `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`
+        `${BASE_URL}/movie/${movieId}?api_key=${API_KEY}&language=en-US`,
       );
       this.setState({ movie: response.data });
     } catch (err) {
@@ -28,6 +28,8 @@ class MovieDetailsPage extends Component {
 
   handleGoBack = () => {
     const { location, history } = this.props;
+
+    // console.log(this.props)
 
     if (location.state && location.state.from) {
       return history.push(location.state.from);
@@ -49,6 +51,7 @@ class MovieDetailsPage extends Component {
     const year = new Date(release_date).getFullYear();
     const vote = vote_average * 10;
 
+    console.log(this.props.location.state);
     return (
       <div>
         <button
@@ -83,7 +86,7 @@ class MovieDetailsPage extends Component {
                 <p className="movie__text">User Score: {vote} %</p>
                 <p className="movie__text">{overview}</p>
                 <ul className="movie__genres">
-                  {genres.map((genre) => (
+                  {genres.map(genre => (
                     <li key={genre.id}>#{genre.name}</li>
                   ))}
                 </ul>
@@ -96,7 +99,10 @@ class MovieDetailsPage extends Component {
           <ul className="additional__list">
             <li className="additional__item">
               <NavLink
-                to={`${this.props.match.url}/cast`}
+                to={{
+                  pathname: `${this.props.match.url}/cast`,
+                  state: { ...this.props.location.state },
+                }}
                 className="additional__link"
                 activeClassName="additional__link--active"
               >
@@ -105,7 +111,10 @@ class MovieDetailsPage extends Component {
             </li>
             <li className="additional__item">
               <NavLink
-                to={`${this.props.match.url}/reviews`}
+                to={{
+                  pathname: `${this.props.match.url}/reviews`,
+                  state: { ...this.props.location.state },
+                }}
                 className="additional__link"
                 activeClassName="additional__link--active"
               >
@@ -117,12 +126,12 @@ class MovieDetailsPage extends Component {
         <Route
           exact
           path={`${this.props.match.path}/cast`}
-          render={(props) => <Cast {...props} />}
+          render={props => <Cast {...props} />}
         />
         <Route
           exact
           path={`${this.props.match.path}/reviews`}
-          render={(props) => <Reviews {...props} />}
+          render={props => <Reviews {...props} />}
         />
       </div>
     );
